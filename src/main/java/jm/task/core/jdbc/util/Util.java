@@ -12,9 +12,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static com.mysql.cj.conf.PropertyKey.PASSWORD;
-import static org.hibernate.cfg.AvailableSettings.DRIVER;
-import static org.hibernate.cfg.AvailableSettings.URL;
 
 public class Util {
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -27,7 +24,6 @@ public class Util {
         try {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-//            System.out.println("Ok");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -51,7 +47,6 @@ public class Util {
                 configuration.setProperties(settings).addAnnotatedClass(User.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
-
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 System.out.println("Problem creating session factory");

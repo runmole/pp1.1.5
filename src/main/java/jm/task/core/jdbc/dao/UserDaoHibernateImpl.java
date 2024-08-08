@@ -3,19 +3,11 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.*;
-
+import java.util.Collections;
 import java.util.List;
 
-import static jm.task.core.jdbc.util.Util.getSessionFactory;
-
-//import static jm.task.core.jdbc.util.Util.getConnection;
 
 public class UserDaoHibernateImpl implements UserDao {
-
-
-    public UserDaoHibernateImpl() {
-
-    }
 
     @Override
     public void createUsersTable() {
@@ -34,11 +26,9 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
-
     @Override
     public void dropUsersTable() {
         Transaction transaction = null;
-
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             String sql = "DROP TABLE IF EXISTS users";
@@ -95,7 +85,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 transaction.rollback();
             }
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
